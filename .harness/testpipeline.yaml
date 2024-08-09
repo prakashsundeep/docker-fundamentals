@@ -1,0 +1,35 @@
+pipeline:
+  name: testpipeline
+  identifier: testpipeline
+  projectIdentifier: default_project
+  orgIdentifier: default
+  tags: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: conngithub
+        repoName: example-voting-app
+        build: <+input>
+  stages:
+    - stage:
+        name: Build
+        identifier: Build
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          platform:
+            os: Windows
+            arch: Amd64
+          runtime:
+            type: Docker
+            spec: {}
+          execution:
+            steps:
+              - step:
+                  type: Run
+                  name: Run_1
+                  identifier: Run_1
+                  spec:
+                    shell: Powershell
+                    command: docker compose up
